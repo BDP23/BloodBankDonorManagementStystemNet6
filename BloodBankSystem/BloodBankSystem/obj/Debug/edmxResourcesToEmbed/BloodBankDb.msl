@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BloodBank2ModelStoreContainer" CdmEntityContainer="BloodBank2Entities">
+    <EntitySetMapping Name="BloodStocks">
+      <EntityTypeMapping TypeName="BloodBank2Model.BloodStock">
+        <MappingFragment StoreEntitySet="BloodStock">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="BloodType" ColumnName="BloodType" />
+          <ScalarProperty Name="bloodQuantityID" ColumnName="bloodQuantityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NewDonors">
+      <EntityTypeMapping TypeName="BloodBank2Model.NewDonor">
+        <MappingFragment StoreEntitySet="NewDonor">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="fname" ColumnName="fname" />
+          <ScalarProperty Name="lname" ColumnName="lname" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="telephone" ColumnName="telephone" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="bloodgroup" ColumnName="bloodgroup" />
+          <ScalarProperty Name="bloodQuantity" ColumnName="bloodQuantity" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="bAddress" ColumnName="bAddress" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

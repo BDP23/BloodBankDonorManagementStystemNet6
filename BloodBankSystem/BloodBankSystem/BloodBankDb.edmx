@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BloodBank2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BloodStock">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BloodType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="bloodQuantityID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="NewDonor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="lname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DOB" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="telephone" Type="bigint" Nullable="false" />
+          <Property Name="gender" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="bloodgroup" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="bloodQuantity" Type="int" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="bAddress" Type="nvarchar" MaxLength="350" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__BloodStoc__blood__5FB337D6">
+          <End Role="NewDonor" Type="Self.NewDonor" Multiplicity="1" />
+          <End Role="BloodStock" Type="Self.BloodStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewDonor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BloodStock">
+              <PropertyRef Name="bloodQuantityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BloodBank2ModelStoreContainer">
+          <EntitySet Name="BloodStock" EntityType="Self.BloodStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NewDonor" EntityType="Self.NewDonor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BloodStoc__blood__5FB337D6" Association="Self.FK__BloodStoc__blood__5FB337D6">
+            <End Role="NewDonor" EntitySet="NewDonor" />
+            <End Role="BloodStock" EntitySet="BloodStock" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BloodBank2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BloodStock">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BloodType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bloodQuantityID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="NewDonor" Relationship="Self.FK__BloodStoc__blood__5FB337D6" FromRole="BloodStock" ToRole="NewDonor" />
+        </EntityType>
+        <EntityType Name="NewDonor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="telephone" Type="Int64" Nullable="false" />
+          <Property Name="gender" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bloodgroup" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bloodQuantity" Type="Int32" Nullable="false" />
+          <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bAddress" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BloodStocks" Relationship="Self.FK__BloodStoc__blood__5FB337D6" FromRole="NewDonor" ToRole="BloodStock" />
+        </EntityType>
+        <Association Name="FK__BloodStoc__blood__5FB337D6">
+          <End Role="NewDonor" Type="Self.NewDonor" Multiplicity="1" />
+          <End Role="BloodStock" Type="Self.BloodStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NewDonor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BloodStock">
+              <PropertyRef Name="bloodQuantityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BloodBank2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BloodStocks" EntityType="Self.BloodStock" />
+          <EntitySet Name="NewDonors" EntityType="Self.NewDonor" />
+          <AssociationSet Name="FK__BloodStoc__blood__5FB337D6" Association="Self.FK__BloodStoc__blood__5FB337D6">
+            <End Role="NewDonor" EntitySet="NewDonors" />
+            <End Role="BloodStock" EntitySet="BloodStocks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BloodBank2ModelStoreContainer" CdmEntityContainer="BloodBank2Entities">
+          <EntitySetMapping Name="BloodStocks">
+            <EntityTypeMapping TypeName="BloodBank2Model.BloodStock">
+              <MappingFragment StoreEntitySet="BloodStock">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BloodType" ColumnName="BloodType" />
+                <ScalarProperty Name="bloodQuantityID" ColumnName="bloodQuantityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NewDonors">
+            <EntityTypeMapping TypeName="BloodBank2Model.NewDonor">
+              <MappingFragment StoreEntitySet="NewDonor">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="fname" ColumnName="fname" />
+                <ScalarProperty Name="lname" ColumnName="lname" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="bloodgroup" ColumnName="bloodgroup" />
+                <ScalarProperty Name="bloodQuantity" ColumnName="bloodQuantity" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="bAddress" ColumnName="bAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

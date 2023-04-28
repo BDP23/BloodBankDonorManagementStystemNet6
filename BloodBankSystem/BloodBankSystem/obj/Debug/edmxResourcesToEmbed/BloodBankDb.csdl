@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BloodBank2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BloodStock">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BloodType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="bloodQuantityID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="NewDonor" Relationship="Self.FK__BloodStoc__blood__5FB337D6" FromRole="BloodStock" ToRole="NewDonor" />
+  </EntityType>
+  <EntityType Name="NewDonor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DOB" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="telephone" Type="Int64" Nullable="false" />
+    <Property Name="gender" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="bloodgroup" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="bloodQuantity" Type="Int32" Nullable="false" />
+    <Property Name="city" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="bAddress" Type="String" MaxLength="350" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="BloodStocks" Relationship="Self.FK__BloodStoc__blood__5FB337D6" FromRole="NewDonor" ToRole="BloodStock" />
+  </EntityType>
+  <Association Name="FK__BloodStoc__blood__5FB337D6">
+    <End Role="NewDonor" Type="Self.NewDonor" Multiplicity="1" />
+    <End Role="BloodStock" Type="Self.BloodStock" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NewDonor">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="BloodStock">
+        <PropertyRef Name="bloodQuantityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BloodBank2Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BloodStocks" EntityType="Self.BloodStock" />
+    <EntitySet Name="NewDonors" EntityType="Self.NewDonor" />
+    <AssociationSet Name="FK__BloodStoc__blood__5FB337D6" Association="Self.FK__BloodStoc__blood__5FB337D6">
+      <End Role="NewDonor" EntitySet="NewDonors" />
+      <End Role="BloodStock" EntitySet="BloodStocks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
